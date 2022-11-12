@@ -1,6 +1,8 @@
 package one.digitalinnovationparking.service;
 
+import one.digitalinnovationparking.exception.ParkingNotFoundException;
 import one.digitalinnovationparking.model.Parking;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,7 +33,11 @@ public class ParkingService {
     }
 
     public Parking findById(String id) {
-        return parkingMap.get(id);
+        Parking parking = parkingMap.get(id);
+        if (parking == null) {
+            throw new ParkingNotFoundException(id);
+        }
+        return parking;
     }
 
     public Parking create(Parking parkingCreate) {
@@ -40,5 +46,11 @@ public class ParkingService {
         parkingCreate.setEntryDate(LocalDateTime.now());
         parkingMap.put(uuid, parkingCreate);
         return parkingCreate;
+    }
+
+
+    public void delete(String id) {
+        findById(id);
+        parkingMap.remove(id);
     }
 }

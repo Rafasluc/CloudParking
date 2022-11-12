@@ -31,28 +31,31 @@ public class ParkingController {
     @GetMapping
     @ApiOperation("FInd all Parkings")
     public ResponseEntity<List<ParkingDTO>> findAll(){
-
         List<Parking> parkingList = parkingService.findALL();
         List<ParkingDTO> result =  parkingMapper.toParkingDTOList(parkingList);
         return ResponseEntity.ok(result);
      }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ParkingDTO> findById(@PathVariable String id){
+        Parking parking = parkingService.findById(id);
+        ParkingDTO result =  parkingMapper.toParkingDTO(parking);
+        return ResponseEntity.ok(result);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable String id){
+        parkingService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
-    @ApiOperation("Create parking")
+    //Está  com bug não consegue criar um novo parking
     public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO dto){
         var parkingCreate = parkingMapper.toParkingCreate(dto);
         var parking = parkingService.create(parkingCreate);
         var result =  parkingMapper.toParkingDTO(parking);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }
-
-
-    @GetMapping("/{id}")
-    @ApiOperation("FInd By Id")
-    public ResponseEntity<ParkingDTO> findById(@PathVariable String id){
-        Parking parking = parkingService.findById(id);
-        ParkingDTO result =  parkingMapper.toParkingDTO(parking);
-        return ResponseEntity.ok(result);
     }
 
 
