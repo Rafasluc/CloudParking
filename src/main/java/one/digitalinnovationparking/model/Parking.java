@@ -13,12 +13,12 @@ public class Parking {
     private Double bill;
 
 
-    public Parking(String license, String state, String model, String color) {
+   /*public Parking(String license, String state, String model, String color) {
         this.license = license;
         this.state = state;
         this.model = model;
         this.color = color;
-    }
+    }*/
 
     public Parking(String id, String license, String state, String model, String color) {
         this.id = id;
