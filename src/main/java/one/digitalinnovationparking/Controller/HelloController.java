@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
-public class HelkloController {
+public class HelloController {
     @GetMapping
     public String hello(){
         return "hello DIO dev tools";

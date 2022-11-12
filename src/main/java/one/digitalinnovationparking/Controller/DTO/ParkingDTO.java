@@ -1,8 +1,12 @@
-package one.digitalinnovationparking.model;
+package one.digitalinnovationparking.Controller.DTO;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 
-public class Parking {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ParkingDTO {
+
     private String id;
     private String license;
     private String state;
@@ -11,22 +15,6 @@ public class Parking {
     private LocalDateTime entryDate;
     private LocalDateTime exitDate;
     private Double bill;
-
-
-    public Parking(String license, String state, String model, String color) {
-        this.license = license;
-        this.state = state;
-        this.model = model;
-        this.color = color;
-    }
-
-    public Parking(String id, String license, String state, String model, String color) {
-        this.id = id;
-        this.license = license;
-        this.state = state;
-        this.model = model;
-        this.color = color;
-    }
 
     public String getId() {
         return id;
