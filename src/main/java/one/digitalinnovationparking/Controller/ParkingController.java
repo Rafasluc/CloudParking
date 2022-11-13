@@ -30,7 +30,7 @@ public class ParkingController {
     }
 
     @GetMapping
-    @ApiOperation("FInd all Parkings")
+    @ApiOperation("Find all Parkings")
     public ResponseEntity<List<ParkingDTO>> findAll(){
         List<Parking> parkingList = parkingService.findALL();
         List<ParkingDTO> result =  parkingMapper.toParkingDTOList(parkingList);
@@ -38,6 +38,7 @@ public class ParkingController {
      }
 
     @GetMapping("/{id}")
+    @ApiOperation("Find By ID")
     public ResponseEntity<ParkingDTO> findById(@PathVariable String id){
         Parking parking = parkingService.findById(id);
         ParkingDTO result =  parkingMapper.toParkingDTO(parking);
@@ -45,18 +46,27 @@ public class ParkingController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation("Delete Parking")
     public ResponseEntity delete(@PathVariable String id){
         parkingService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping
-    //Está  com bug não consegue criar um novo parking
+    @ApiOperation("Create New Parking")
     public ResponseEntity<ParkingDTO> create(@RequestBody ParkingCreateDTO dto){
         var parkingCreate = parkingMapper.toParkingCreate(dto);
         var parking = parkingService.create(parkingCreate);
         var result =  parkingMapper.toParkingDTO(parking);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
+    }
+
+    @PutMapping("/{id}")
+    @ApiOperation("Update parking")
+    public ResponseEntity<ParkingDTO> update(@PathVariable String id, @RequestBody ParkingCreateDTO parkingCreteDTO) {
+        Parking parkingUpdate = parkingMapper.toParkingCreate(parkingCreteDTO);
+        Parking parking = parkingService.update(id, parkingUpdate);
+        return ResponseEntity.ok(parkingMapper.toParkingDTO(parking));
     }
 
 
