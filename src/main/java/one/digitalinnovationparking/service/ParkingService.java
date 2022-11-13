@@ -16,12 +16,11 @@ public class ParkingService {
 
     static {
         var id = getUUIO();
-        var id1 = getUUIO();
         Parking parking= new Parking(id, "DMS-1111", "SP", "CELTA", "Azul");
-        Parking parking1= new Parking(id1, "KKK-1234", "PE", "BMW M3", "VERMELHO");
+
 
         parkingMap.put(id, parking);
-        parkingMap.put(id1, parking1);
+
     }
 
     public List<Parking> findALL(){
@@ -61,5 +60,15 @@ public class ParkingService {
         parking.setModel(parkingCreate.getModel());
         parking.setLicense(parkingCreate.getLicense());
         return parking;
+    }
+
+
+
+
+   public Parking checkOut(String id) {
+           Parking parking = findById(id);
+           parking.setExitDate(LocalDateTime.now());
+           parking.setBill(ParkingCheckOut.getBill(parking));
+           return parking;
     }
 }
