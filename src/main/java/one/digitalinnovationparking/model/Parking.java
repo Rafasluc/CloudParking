@@ -1,8 +1,15 @@
 package one.digitalinnovationparking.model;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
+@Entity
 public class Parking {
+
+    @Id
     private String id;
     private String license;
     private String state;
