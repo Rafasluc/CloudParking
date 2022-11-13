@@ -41,10 +41,10 @@ public class ParkingService {
     }
 
     public Parking create(Parking parkingCreate) {
-        String uuid = getUUIO();
-        parkingCreate.setId(uuid);
+        String uuio = getUUIO();
+        parkingCreate.setId(uuio);
         parkingCreate.setEntryDate(LocalDateTime.now());
-        parkingMap.put(uuid, parkingCreate);
+        parkingMap.put(uuio, parkingCreate);
         return parkingCreate;
     }
 
