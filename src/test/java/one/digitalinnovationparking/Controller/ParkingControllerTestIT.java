@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ParkingControllerTestIT {
+class ParkingControllerTestIT extends AbstractContainerBase {
 
 
     @LocalServerPort
