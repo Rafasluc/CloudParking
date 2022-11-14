@@ -28,6 +28,8 @@ class ParkingControllerTestIT extends AbstractContainerBase {
     @Test
     void whenFindAllThenCheckResult() {
         RestAssured.given()
+                .auth()
+                .basic("user", "12345")
                 .when()
                 .get("/parking")
                 .then()
